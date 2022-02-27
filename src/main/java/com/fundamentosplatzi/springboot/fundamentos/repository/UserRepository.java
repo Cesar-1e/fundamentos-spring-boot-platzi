@@ -30,4 +30,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     //List<User> findByNameLikeOrderByIdDesc(String name);
     List<User> findByNameContainingOrderByIdDesc(String name);
+
+    List<User> findTop3ByNameLike(String name);
+
+    List<User> findByBirthDateBefore(LocalDate birthDate);
 }

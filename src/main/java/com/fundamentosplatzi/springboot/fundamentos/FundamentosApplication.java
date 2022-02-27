@@ -97,10 +97,16 @@ public class FundamentosApplication implements CommandLineRunner {
 
         userRepository.findByNameContainingOrderByIdDesc("user")
                 .forEach(user -> LOGGER.info("Usuario encontrado con like y ordenado " + user));
+
+        userRepository.findTop3ByNameLike("%user%")
+                .forEach(user -> LOGGER.info("Usuario encontrado con like y limitado a 3 registros " + user));
+
+        userRepository.findByBirthDateBefore(LocalDate.of(2021, 6, 1))
+                .forEach(user -> LOGGER.info("Usuarios que cumplieron antes del 2021-06-01 " + user));
     }
 
     private void saveUserInDataBase(){
-        User user1 = new User("John", "john@domain.com", LocalDate.of(2021, 03, 20));
+        User user1 = new User("John", "john@domain.com", LocalDate.of(2021, 3, 20));
         User user2 = new User("John", "julie@domain.com", LocalDate.of(2021, 5, 21));
         User user3 = new User("Daniela", "daniela@domain.com", LocalDate.of(2021, 7, 21));
         User user4 = new User("user4", "user5@domain.com", LocalDate.of(2021, 7, 7));
