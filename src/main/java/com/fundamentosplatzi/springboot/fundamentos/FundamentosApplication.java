@@ -79,12 +79,16 @@ public class FundamentosApplication implements CommandLineRunner {
     private void saveWithErrorTransaction(){
         User test1 = new User("TestTransactional1", "TestTransactional1@domain.com", LocalDate.now());
         User test2 = new User("Test2Transactional1", "Test2Transactional1@domain.com", LocalDate.now());
-        User test3 = new User("Test3Transactional1", "Test3Transactional1@domain.com", LocalDate.now());
+        User test3 = new User("Test3Transactional1", "TestTransactional1@domain.com", LocalDate.now());
         User test4 = new User("Test4Transactional1", "Test4Transactional1@domain.com", LocalDate.now());
 
         List<User> users = Arrays.asList(test1, test2, test3, test4);
 
-        userService.saveTransactional(users);
+        try{
+            userService.saveTransactional(users);
+        }catch (Exception e){
+            LOGGER.error("Esta es una excepción dentro del metodo transaccional" + e);
+        }
 
         userService.getAllUsers()
                 .forEach(user -> LOGGER.info("Este es el usuario dentro del metodo transaccional " + user));
@@ -133,7 +137,7 @@ public class FundamentosApplication implements CommandLineRunner {
         User user5 = new User("user5", "user6@domain.com", LocalDate.of(2021, 11, 11));
         User user6 = new User("user6", "user7@domain.com", LocalDate.of(2021, 2, 25));
         User user7 = new User("user7", "user8@domain.com", LocalDate.of(2021, 3, 11));
-        User user8 = new User("user8", "user8@domain.com", LocalDate.of(2021, 4, 12));
+        User user8 = new User("user8", "user4@domain.com", LocalDate.of(2021, 4, 12));
         User user9 = new User("user9", "user9@domain.com", LocalDate.of(2021, 5, 22));
         User user10 = new User("user10", "user10@domain.com", LocalDate.of(2021, 8, 3));
         User user11 = new User("user11", "user11@domain.com", LocalDate.of(2021, 1, 12));
